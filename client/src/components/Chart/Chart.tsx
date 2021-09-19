@@ -7,6 +7,7 @@ import {
   LineChart,
   ResponsiveContainer,
   XAxis,
+  Tooltip,
 } from "recharts";
 
 const query = gql`
@@ -24,10 +25,11 @@ interface Props {
   globalMetric: string;
 }
 const Chart: React.FC<Props> = ({ globalMetric }) => {
-//   const metric = globalMetric;
+  //   const metric = globalMetric;
+
   const { loading, error, data } = useQuery(query, {
     variables: {
-        globalMetric,
+      globalMetric,
     },
   });
   const infoData = data?.getMeasurements;
@@ -41,7 +43,13 @@ const Chart: React.FC<Props> = ({ globalMetric }) => {
       <ResponsiveContainer width="100%" aspect={4 / 1}>
         <LineChart data={infoData}>
           <XAxis dataKey="at" stroke="#5550bd" />
-          <Line type="monotone" dataKey="value" stroke="#5550bd" />
+          <Line
+            activeDot={{ r: 8 }}
+            type="monotone"
+            dataKey="value"
+            stroke="#5550bd"
+          />
+          <Tooltip />
           <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />
         </LineChart>
       </ResponsiveContainer>
