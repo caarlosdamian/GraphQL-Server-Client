@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { Container } from "@material-ui/core";
 import SelectMetric from "./components/SelectMetric/SelectMetric";
 import { useState } from "react";
+import Chart from "./components/Chart/Chart";
 
 function App() {
   const [globalMetric, setGlobalMetric] = useState("");
@@ -24,6 +25,7 @@ function App() {
         }}
       >
         <SelectMetric setGlobalMetric={setGlobalMetric} globalMetric={globalMetric} />
+        <Chart globalMetric={globalMetric}/>
       </Container>
     </ApolloProvider>
   );
